@@ -1,0 +1,77 @@
+<html>
+  <body>
+    <div class="content-wrapper" style="display: none">
+      <h1 class="title">Recruit Wizard</h1>
+      <p class="subtitle">
+        Automatically respond to recruiters on LinkedIn with a custom message.
+      </p>
+      <textarea
+        class="recruitment-message"
+        placeholder="Paste your recruitment message here"
+      ></textarea>
+
+      <div class="type-wrapper">
+        <div>
+          <h2 class="type-title">Tone</h2>
+          <button
+            class="type-option professional"
+            data-selected="true"
+            data-category="tone"
+          >
+            Professional
+          </button>
+          <button
+            class="type-option cordial"
+            data-selected="false"
+            data-category="tone"
+          >
+            Cordial
+          </button>
+        </div>
+
+        <div>
+          <h2 class="type-title">Needs more information</h2>
+          <button
+            class="type-option additional-information"
+            data-selected="false"
+            data-category="additionalInformation"
+          >
+            Salary
+          </button>
+          <button
+            class="type-option additional-information"
+            data-selected="false"
+            data-category="additionalInformation"
+          >
+            Remote friendly
+          </button>
+          <button
+            class="type-option additional-information"
+            data-selected="false"
+            data-category="additionalInformation"
+          >
+            Project
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button type="button" class="generate-button">Generate response</button>
+      </div>
+    </div>
+    <div class="wrong-page-wrapper" style="display: none">
+      <h1 class="wrong-page__title">
+        You don't appear to be on
+        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+        page.
+      </h1>
+      <br />
+      <p class="wrong-page__subtext">
+        If this seems wrong, feel free to let me know via
+        <a href="https://twitter.com/christo_kade" target="_blank">Twitter</a>.
+      </p>
+    </div>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </body>
+</html>
