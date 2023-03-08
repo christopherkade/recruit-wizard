@@ -35,7 +35,7 @@ generateButton.addEventListener("click", async () => {
   }: \n\n"${recruitmentMessage.value}"`;
 
   // console.log("Prompt", prompt);
-  const response = await fetch("http://localhost:3000/api/generate", {
+  const response = await fetch("https://recruit-wizard.vercel.app/api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

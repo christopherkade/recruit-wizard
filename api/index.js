@@ -21,6 +21,7 @@ app.post("/api", async (req, res) => {
     const prompt = req.body.prompt;
 
     console.log("PROMPT", prompt);
+    console.log("API KEY", process.env.OPENAI_API_KEY);
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
