@@ -16,7 +16,7 @@ const openai = new OpenAIApi(configuration);
 app.use(cors());
 app.use(express.json());
 
-app.get("/api", async (req, res) => {
+app.post("/api", async (req, res) => {
   try {
     const prompt = req.body.prompt;
 
