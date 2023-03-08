@@ -8,6 +8,14 @@ const generateButton = document.querySelector(".generate-button");
 const optionToneProfessional = document.querySelector(".professional");
 const optionToneCordial = document.querySelector(".cordial");
 
+const generateReponseLabel = document.querySelector(".generate-response-label");
+const generatingResponseLabel = document.querySelector(
+  ".generating-response-label"
+);
+const generatedResponseLabel = document.querySelector(
+  ".generated-response-label"
+);
+
 const ALLOWED_URL = "www.linkedin.com/";
 
 const defaultOptions = {
@@ -23,7 +31,16 @@ const CATEGORIES = {
 const options = defaultOptions;
 
 generateButton.addEventListener("click", async () => {
-  console.log("Generating response with the following options", options);
+  if (recruitmentMessage.value.length === 0) {
+    recruitmentMessage.style.border = "1px solid red";
+    return;
+  } else {
+    recruitmentMessage.style.border = "initial";
+    generatingResponseLabel.style.display = "inline-block";
+    generateReponseLabel.style.display = "none";
+    generatedResponseLabel.style.display = "none";
+  }
+
   const prompt = `Please provide a response to this recruitment message with a ${
     options.tone
   } tone ${
@@ -34,7 +51,6 @@ generateButton.addEventListener("click", async () => {
       : ""
   }: \n\n"${recruitmentMessage.value}"`;
 
-  // console.log("Prompt", prompt);
   const response = await fetch("https://recruit-wizard.vercel.app/api", {
     method: "POST",
     headers: {
@@ -51,22 +67,19 @@ generateButton.addEventListener("click", async () => {
 
   let answer = await response.json();
 
-  console.log("Answer", answer);
+  generatingResponseLabel.style.display = "none";
+  generatedResponseLabel.style.display = "inline-block";
+  navigator.clipboard.writeText(answer.bot);
 });
 
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
   tabId = tabs[0].id;
 
-  console.log("Loading", tabs[0].url);
-
   if (!tabs[0].url?.includes(ALLOWED_URL)) {
-    console.log("Wrong page");
     contentWrapper.style.display = "none";
     wrongPageWrapper.style.display = "inline-block";
     return;
   }
-
-  console.log("Displaying it all");
 
   contentWrapper.style.display = "inline-block";
   wrongPageWrapper.style.display = "none";
@@ -84,8 +97,6 @@ const handleAdditionalInformationClick = (
   const optionName = additionalInformationOptions[index].innerText;
   const isSelected =
     additionalInformationOptions[index].dataset.selected === "true";
-  console.log("Clicked on", optionName);
-  console.log("is selected", isSelected);
 
   if (isSelected) {
     additionalInformationOptions[index].dataset.selected = "false";
@@ -127,12 +138,7 @@ const setupListeners = () => {
   const additionalInformationOptions = document.querySelectorAll(
     ".additional-information"
   );
-  console.log("optionAdditionalInformation", additionalInformationOptions);
   const options = [...additionalInformationOptions];
-
-  // nodeArray.forEach((type, index) => {
-  //   type.addEventListener("click", () => handleOptionClick(typeOptions, index));
-  // });
 
   optionToneProfessional.addEventListener("click", (e) =>
     handleToneClick(e, "professional")

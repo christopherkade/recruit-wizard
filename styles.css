@@ -11,7 +11,12 @@ html {
 }
 
 a {
-  color: #8ab4f8;
+  color: #2b2d42;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
 }
 
 .content-wrapper {
@@ -22,9 +27,13 @@ a {
   font-size: 1.5rem;
   margin: 0;
   font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .subtitle {
+  text-align: center;
   margin: 4px 0 20px 0;
 }
 
@@ -96,4 +105,9 @@ a {
 
 .wrong-page__subtext {
   margin: 0;
+}
+
+.generated-response-label,
+.generating-response-label {
+  display: none;
 }
